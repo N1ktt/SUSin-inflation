@@ -9,7 +9,12 @@ muzyczka.addEventListener(
     },
     false
 )
-muzyczka.play()
+document.querySelector('body').addEventListener("mouseover", ()=>
+{
+    muzyczka.play()
+    document.querySelector('body').removeEventListener('mouseover')
+})
+
 
 sasin.addEventListener("click", () => {
     klakson.play()
