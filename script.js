@@ -10,17 +10,11 @@ muzyczka.addEventListener(
     false
 )
 
-function muzyka_start()
-{
+function muzyka_start() {
     muzyczka.play()
-    document.querySelector('body').removeEventListener("click", muzyka_start)
-    ducument.querySelector('p').removeEventListener("click", muzyka_start)
-
+    document.querySelector("body").removeEventListener("click", muzyka_start)
 }
-document.querySelector('body').addEventListener("click", muzyka_start)
-ducument.querySelector('p').addEventListener("click", muzyka_start)
-
-
+document.querySelector("body").addEventListener("click", muzyka_start)
 
 sasin.addEventListener("click", () => {
     klakson.play()
@@ -42,7 +36,7 @@ async function getData() {
 
     // url dla polski 2 miesiace
     const apiUrl = `https://stats.oecd.org/SDMX-JSON/data/PRICES_CPI/POL.CPALTT01.CTGY.M/all?startTime=${prevYear}-${prevMonth}&endTime=${todayYear}-${todayMonth}&dimensionAtObservation=allDimensions`
-
+    // console.log(apiUrl)
     const res = await fetch(apiUrl)
     const results = await res.json()
     let span = document.querySelector("span")
