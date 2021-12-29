@@ -13,9 +13,15 @@ muzyczka.addEventListener(
 function muzyka_start()
 {
     muzyczka.play()
-    document.querySelector('body').removeEventListener('mouseover', muzyka_start)
+    document.querySelector('body').removeEventListener("click", muzyka_start)
+    ducument.querySelector('img').removeEventListener("click", muzyka_start)
+    ducument.querySelector('p').removeEventListener("click", muzyka_start)
+    ducument.querySelectorAll('div')[1].removeEventListener("click", muzyka_start)
 }
-document.querySelector('body').addEventListener("mouseover", muzyka_start)
+document.querySelector('body').addEventListener("click", muzyka_start)
+ducument.querySelector('img').addEventListener("click", muzyka_start)
+ducument.querySelector('p').addEventListener("click", muzyka_start)
+ducument.querySelectorAll('div')[1].addEventListener("click", muzyka_start)
 
 
 sasin.addEventListener("click", () => {
