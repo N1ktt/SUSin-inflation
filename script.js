@@ -9,11 +9,13 @@ muzyczka.addEventListener(
     },
     false
 )
-document.querySelector('body').addEventListener("mouseover", ()=>
+
+function muzyka_start()
 {
     muzyczka.play()
-    document.querySelector('body').removeEventListener('mouseover')
-})
+    document.querySelector('body').removeEventListener('mouseover', muzyka_start)
+}
+document.querySelector('body').addEventListener("mouseover", muzyka_start)
 
 
 sasin.addEventListener("click", () => {
