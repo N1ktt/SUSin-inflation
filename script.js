@@ -25,14 +25,23 @@ async function getData() {
 
     let todayYear = today.getFullYear()
     let todayMonth = today.getMonth()
-    let prevMonth = todayMonth - 1
+    let prevMonth = todayMonth - 2
     let prevYear = todayYear
     if (prevMonth == -1) {
         prevMonth = 11
         prevYear -= 1
+    } else if (prevMonth == -2) {
+        prevMonth = 10
+        prevYear -= 1
     }
     prevMonth += 1
     todayMonth += 1
+    if (prevMonth < 10) {
+        prevMonth = "0" + prevMonth
+    }
+    if (todayMonth < 10) {
+        todayMonth = "0" + todayMonth
+    }
 
     // url dla polski 2 miesiace
     const apiUrl = `https://stats.oecd.org/SDMX-JSON/data/PRICES_CPI/POL.CPALTT01.CTGY.M/all?startTime=${prevYear}-${prevMonth}&endTime=${todayYear}-${todayMonth}&dimensionAtObservation=allDimensions`
@@ -41,13 +50,19 @@ async function getData() {
     const results = await res.json()
     let span = document.querySelector("span")
     let inflation = 0
-    if (results.dataSets[0].observations["0:0:0:0:1"] == undefined) {
-        // console.log(results.dataSets[0].observations["0:0:0:0:0"][0])
-        inflation = results.dataSets[0].observations["0:0:0:0:0"][0]
+    if (results.dataSets[0].observations["0:0:0:0:2"] == undefined) {
+        if (results.dataSets[0].observations["0:0:0:0:1"] == undefined) {
+            // console.log(results.dataSets[0].observations["0:0:0:0:0"][0])
+            inflation = results.dataSets[0].observations["0:0:0:0:0"][0]
+        } else {
+            // console.log(results.dataSets[0].observations["0:0:0:0:1"][0])
+            inflation = results.dataSets[0].observations["0:0:0:0:1"][0]
+        }
     } else {
-        // console.log(results.dataSets[0].observations["0:0:0:0:1"][0])
-        inflation = results.dataSets[0].observations["0:0:0:0:1"][0]
+        // console.log(results.dataSets[0].observations["0:0:0:0:2"][0])
+        inflation = results.dataSets[0].observations["0:0:0:0:2"][0]
     }
+
     inflation *= 10
     inflation = Math.round(inflation)
     inflation /= 10
