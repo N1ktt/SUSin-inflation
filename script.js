@@ -9,12 +9,26 @@ muzyczka.addEventListener(
     },
     false
 )
-
-function muzyka_start() {
-    muzyczka.play()
-    document.querySelector("body").removeEventListener("click", muzyka_start)
-}
-document.querySelector("body").addEventListener("click", muzyka_start)
+setTimeout(() => {
+    const section = document.createElement("section")
+    const p1 = document.createElement("p")
+    p1.innerText = "Gratulacje użytkowniku wygrałeś darmowego Iphone 6S!"
+    section.append(p1)
+    const p2 = document.createElement("p")
+    p2.innerText = "Aby odebrać nagrodę kliknij poniższy przycisk"
+    section.append(p2)
+    const input = document.createElement("input")
+    input.type = "button"
+    input.value = "Kliknij tutaj"
+    section.append(input)
+    document.querySelector("body").append(section)
+    function remove_pop() {
+        document.querySelector("section").remove()
+        muzyczka.play()
+        document.querySelector("body").removeEventListener("click", remove_pop)
+    }
+    document.querySelector("body").addEventListener("click", remove_pop)
+}, 6000)
 
 sasin.addEventListener("click", () => {
     klakson.play()

@@ -44,3 +44,40 @@ p {
         transform: scale(300%, 200%);
     }
 }
+section {
+    grid-row: 2/-2;
+    grid-column: 2/-2;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+    background-color: #eee;
+    border-radius: 20px;
+    opacity: 0.9;
+    animation-name: slide_down;
+    animation-duration: 2.5s;
+}
+section p {
+    font-size: 3vw;
+    text-align: center;
+    color: #000;
+}
+section input {
+    min-width: 80%;
+    min-height: 30%;
+}
+input {
+    border-radius: 10px;
+    font-size: 3vw;
+}
+input:hover {
+    cursor: pointer;
+}
+@keyframes slide_down {
+    0% {
+        transform: translateY(150%);
+    }
+    100% {
+    }
+}
