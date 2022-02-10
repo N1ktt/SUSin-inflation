@@ -57,7 +57,7 @@ async function getData() {
         todayMonth = "0" + todayMonth
     }
 
-    // url dla polski 2 miesiace
+    // url dla polski 3 miesiace
     const apiUrl = `https://stats.oecd.org/SDMX-JSON/data/PRICES_CPI/POL.CPALTT01.CTGY.M/all?startTime=${prevYear}-${prevMonth}&endTime=${todayYear}-${todayMonth}&dimensionAtObservation=allDimensions`
     // console.log(apiUrl)
     const res = await fetch(apiUrl)
