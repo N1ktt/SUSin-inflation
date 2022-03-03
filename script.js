@@ -36,17 +36,15 @@ sasin.addEventListener("click", () => {
 
 async function getData() {
     let today = new Date()
-
+    let months = 6
     let todayYear = today.getFullYear()
     let todayMonth = today.getMonth()
-    let prevMonth = todayMonth - 2
+    let prevMonth = todayMonth - months
     let prevYear = todayYear
-    if (prevMonth == -1) {
-        prevMonth = 11
-        prevYear -= 1
-    } else if (prevMonth == -2) {
-        prevMonth = 10
-        prevYear -= 1
+    if(prevMonth<0)
+    {
+        prevMonth=12+prevMonth
+        prevYear-=1
     }
     prevMonth += 1
     todayMonth += 1
@@ -57,13 +55,17 @@ async function getData() {
         todayMonth = "0" + todayMonth
     }
 
-    // url dla polski 3 miesiace
+    // url dla polski "months" miesiace
     const apiUrl = `https://stats.oecd.org/SDMX-JSON/data/PRICES_CPI/POL.CPALTT01.CTGY.M/all?startTime=${prevYear}-${prevMonth}&endTime=${todayYear}-${todayMonth}&dimensionAtObservation=allDimensions`
     // console.log(apiUrl)
     const res = await fetch(apiUrl)
     const results = await res.json()
     let span = document.querySelector("span")
     let inflation = 0
+    while (true)
+    {
+        if
+    }
     if (results.dataSets[0].observations["0:0:0:0:2"] == undefined) {
         if (results.dataSets[0].observations["0:0:0:0:1"] == undefined) {
             // console.log(results.dataSets[0].observations["0:0:0:0:0"][0])
