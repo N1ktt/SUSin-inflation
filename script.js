@@ -36,15 +36,14 @@ sasin.addEventListener("click", () => {
 
 async function getData() {
     let today = new Date()
-    let months = 6
+    let months = 10
     let todayYear = today.getFullYear()
     let todayMonth = today.getMonth()
     let prevMonth = todayMonth - months
     let prevYear = todayYear
-    if(prevMonth<0)
-    {
-        prevMonth=12+prevMonth
-        prevYear-=1
+    if (prevMonth < 0) {
+        prevMonth = 12 + prevMonth
+        prevYear -= 1
     }
     prevMonth += 1
     todayMonth += 1
@@ -62,27 +61,38 @@ async function getData() {
     const results = await res.json()
     let span = document.querySelector("span")
     let inflation = 0
-    while (true)
-    {
-        if
-    }
-    if (results.dataSets[0].observations["0:0:0:0:2"] == undefined) {
-        if (results.dataSets[0].observations["0:0:0:0:1"] == undefined) {
-            // console.log(results.dataSets[0].observations["0:0:0:0:0"][0])
-            inflation = results.dataSets[0].observations["0:0:0:0:0"][0]
-        } else {
-            // console.log(results.dataSets[0].observations["0:0:0:0:1"][0])
-            inflation = results.dataSets[0].observations["0:0:0:0:1"][0]
+    while (true) {
+        let base = "0:0:0:0:" + (months - 1)
+        months--
+        if (months == -1) {
+            console.error("No data")
+            break
         }
-    } else {
-        // console.log(results.dataSets[0].observations["0:0:0:0:2"][0])
-        inflation = results.dataSets[0].observations["0:0:0:0:2"][0]
+        if (results.dataSets[0].observations[base] == undefined) {
+            //pas
+        } else {
+            inflation = results.dataSets[0].observations[base][0]
+            break
+        }
     }
+    // if (results.dataSets[0].observations["0:0:0:0:2"] == undefined) {
+    //     if (results.dataSets[0].observations["0:0:0:0:1"] == undefined) {
+    //         // console.log(results.dataSets[0].observations["0:0:0:0:0"][0])
+    //         inflation = results.dataSets[0].observations["0:0:0:0:0"][0]
+    //     } else {
+    //         // console.log(results.dataSets[0].observations["0:0:0:0:1"][0])
+    //         inflation = results.dataSets[0].observations["0:0:0:0:1"][0]
+    //     }
+    // } else {
+    //     // console.log(results.dataSets[0].observations["0:0:0:0:2"][0])
+    //     inflation = results.dataSets[0].observations["0:0:0:0:2"][0]
+    // }
 
     inflation *= 10
     inflation = Math.round(inflation)
     inflation /= 10
     span.innerHTML = inflation
+    console.log(results)
 }
 getData().catch((error) => {
     console.error("Data recieved")
